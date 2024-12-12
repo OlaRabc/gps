@@ -2,7 +2,7 @@
   <div class="overflow-y-hidden">
     <GpsHeader />
     <div class="min-h-screen">
-      <div class="flex justify-center my-12">
+      <div class="flex justify-center my-24">
         <div class="w-1/3 flex justify-center">
           <GpsClock />
         </div>
@@ -17,14 +17,15 @@
 
         <div class="w-1/3 flex justify-center">
           <GpsSelect
-            :options="itemList"
+            :options="deviceList"
             name="urządzenie"
-            placeholder="Wybierz urządzenie"
+            :placeholder="selectedDevice"
+            @on-change="changeDevice"
           />
         </div>
       </div>
 
-      <div>
+      <div class="mx-16">
         <GpsMap />
       </div>
     </div>
@@ -32,5 +33,10 @@
 </template>
 
 <script setup lang="ts">
-const itemList: string[] = ["LSES123AU4", "LSES13UU4K"];
+const deviceList: string[] = ["LSES123AU4"];
+const selectedDevice: Ref<string> = ref("LSES123AU4");
+
+const changeDevice = (newSelectedDevice: string) => {
+  selectedDevice.value = newSelectedDevice;
+};
 </script>
